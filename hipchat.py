@@ -3,9 +3,9 @@
 import sys
 import argparse
 import json
+from urllib2 import URLError
 import webbrowser
 import requests
-
 from workflow import Workflow, web, PasswordNotFound
 
 def hipchat_keys():
@@ -24,24 +24,44 @@ def hipchat_list(keys):
 
     for key in keys:
         api_key = str(key)
-        hipchat_auth = web.get('https://api.hipchat.com/v2/room?auth_token=' +
-                               api_key + '&auth_test=true')
+        try:
+            hipchat_auth = web.get('https://api.hipchat.com/v2/room?auth_token=' +
+                                   api_key + '&auth_test=true',
+                                   None,
+                                   timeout=wflw.settings['timeout'])
+        except URLError:
+            wflw.add_item(title='Error connecting to HipChat API.',
+                          valid=False)
+            wflw.send_feedback()
+            return None
+
         if not hipchat_auth or \
            not hipchat_auth.status_code == requests.codes.accepted or \
            not 'success' in hipchat_auth.json():
 
-            wflw.logger.debug("hipchat_auth.status_code was %d", hipchat_auth.status_code)
             wflw.add_item(title='Authentication failed. Check your API key',
                           valid=False)
             wflw.send_feedback()
-            break
+            return None
         else:
-            hipchat_rooms = web.get(wflw.settings['api_url'] +
-                                    '/v2/room?auth_token=' +
-                                    api_key + '&max-results=1000').json()
-            hipchat_users = web.get(wflw.settings['api_url'] +
-                                    '/v2/user?auth_token=' +
-                                    api_key + '&max-results=1000').json()
+            try:
+                hipchat_rooms = web.get(wflw.settings['api_url'] +
+                                        '/v2/room?auth_token=' +
+                                        api_key + '&max-results=1000',
+                                        None,
+                                        timeout=wflw.settings['timeout']
+                                       ).json()
+                hipchat_users = web.get(wflw.settings['api_url'] +
+                                        '/v2/user?auth_token=' +
+                                        api_key + '&max-results=1000',
+                                        None,
+                                        timeout=wflw.settings['timeout']
+                                       ).json()
+            except URLError:
+                wflw.add_item(title='Error fetching lists from HipChat API.',
+                              valid=False)
+                wflw.send_feedback()
+                return None
 
             for room in hipchat_rooms['items']:
                 hipchat_search.append({
@@ -51,7 +71,6 @@ def hipchat_list(keys):
                     'type': 'room'
                     })
             for user in hipchat_users['items']:
-                wflw.logger.debug(user)
                 hipchat_search.append({
                     'name': user['name'],
                     'mention_name': user['mention_name'],
@@ -103,18 +122,21 @@ def main(wflw):
     if query:
         hipchat_search = wflw.filter(query, hipchat_search, key=search_hipchat_names)
 
-    for item in hipchat_search:
-        wflw.add_item(
-            title=item['name'],
-            subtitle=item['description'],
-            arg=json.dumps(item),
-            valid=True
-            )
-    wflw.send_feedback()
+    if hipchat_search:
+        for item in hipchat_search:
+            wflw.add_item(
+                title=item['name'],
+                subtitle=item['description'],
+                arg=json.dumps(item),
+                valid=True
+                )
+        wflw.send_feedback()
 
 
 if __name__ == u"__main__":
     WF = Workflow()
     if 'api_url' not in WF.settings:
         WF.settings['api_url'] = "https://api.hipchat.com"
+    if 'timeout' not in WF.settings:
+        WF.settings['timeout'] = 5
     sys.exit(WF.run(main))
