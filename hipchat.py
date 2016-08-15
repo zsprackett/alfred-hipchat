@@ -82,6 +82,8 @@ def hipchat_list(keys):
 def search_hipchat_names(hlist):
     elements = []
     elements.append(hlist['name'])
+    if hlist['type'] == "user":
+        elements.append(hlist['mention_name'])
     return u' '.join(elements)
 
 def hipchat_urlopen(target_json):
@@ -120,7 +122,10 @@ def main(wflw):
     hipchat_search = wflw.cached_data('alfred-hipchat', wrapper, max_age=120)
 
     if query:
-        hipchat_search = wflw.filter(query, hipchat_search, key=search_hipchat_names)
+        hipchat_search = wflw.filter(query,
+                                     hipchat_search,
+                                     key=search_hipchat_names,
+                                     min_score=20)
 
     if hipchat_search:
         for item in hipchat_search:
