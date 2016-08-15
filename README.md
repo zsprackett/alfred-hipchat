@@ -1,7 +1,7 @@
 Alfred-HipChat
 ==============
 
-Alfred workflow to interact, and perform various functions with the service [Slack](http://hipchat.com/).
+Alfred workflow to interact, and perform various functions with the service [HipChat](http://hipchat.com/).
 
 ## Getting started
 1. Install alfred-hipchat by visiting the download page in Github or via the [Packal page](http://www.packal.org/workflow/alfred-hipchat)
