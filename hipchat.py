@@ -83,7 +83,7 @@ def search_hipchat_names(hlist):
     elements = []
     elements.append(hlist['name'])
     if hlist['type'] == "user":
-        elements.append(hlist['mention_name'])
+        elements.append(u'@' + hlist['mention_name'])
     return u' '.join(elements)
 
 def hipchat_urlopen(target_json):
