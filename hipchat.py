@@ -29,7 +29,7 @@ def hipchat_list(keys):
                                    api_key + '&auth_test=true',
                                    None,
                                    timeout=wflw.settings['timeout'])
-        except URLError:
+        except URLError, requests.SSLError:
             wflw.add_item(title='Error connecting to HipChat API.',
                           valid=False)
             wflw.send_feedback()
@@ -57,7 +57,7 @@ def hipchat_list(keys):
                                         None,
                                         timeout=wflw.settings['timeout']
                                        ).json()
-            except URLError:
+            except URLError, requests.SSLError:
                 wflw.add_item(title='Error fetching lists from HipChat API.',
                               valid=False)
                 wflw.send_feedback()
@@ -119,7 +119,9 @@ def main(wflw):
     def wrapper():
         return hipchat_list(keys=hipchat_keys())
 
-    hipchat_search = wflw.cached_data('alfred-hipchat', wrapper, max_age=120)
+    hipchat_search = wflw.cached_data('alfred-hipchat',
+                                      wrapper,
+                                      max_age=wflw.settings['cache_max_age'])
 
     if query:
         hipchat_search = wflw.filter(query,
@@ -144,4 +146,6 @@ if __name__ == u"__main__":
         WF.settings['api_url'] = "https://api.hipchat.com"
     if 'timeout' not in WF.settings:
         WF.settings['timeout'] = 5
+    if 'cache_max_age' not in WF.settings:
+        WF.settings['cache_max_age'] = 180
     sys.exit(WF.run(main))
