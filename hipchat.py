@@ -2,6 +2,7 @@
 
 import sys
 import argparse
+import re
 import json
 from urllib2 import URLError
 import webbrowser
@@ -13,7 +14,7 @@ def hipchat_keys():
     try:
         keys = wflw.get_password('hipchat_api_key')
     except PasswordNotFound:
-        wflw.add_item(title='No API key set. Please run hck', valid=False)
+        wflw.add_item(title='No API key set. Please run hipchat_api_token', valid=False)
         wflw.send_feedback()
         return 0
     return keys.split(",")
@@ -39,7 +40,7 @@ def hipchat_list(keys):
            not hipchat_auth.status_code == requests.codes.accepted or \
            not 'success' in hipchat_auth.json():
 
-            wflw.add_item(title='Authentication failed. Check your API key',
+            wflw.add_item(title='Authentication failed. Check your API token',
                           valid=False)
             wflw.send_feedback()
             return None
@@ -89,22 +90,47 @@ def search_hipchat_names(hlist):
 def hipchat_urlopen(target_json):
     url = ""
     try:
+        wflw = Workflow()
         tgt = json.loads(target_json)
-        url = "hipchat://sugarcrm.hipchat.com/%s/%s" % (tgt['type'], tgt['id'])
+        url = "hipchat://%s/%s/%s" % (wflw.settings['hipchat_host'],
+                                      tgt['type'], tgt['id'])
     except ValueError:
         pass
     return url
 
 def main(wflw):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--setkey', dest='apikey', nargs='?', default=None)
+    parser.add_argument('--api_key', dest='api_key', nargs='?', default=None)
+    parser.add_argument('--api_url', dest='api_url', nargs='?', default=None)
+    parser.add_argument('--cache_max_age', dest='cache_max_age', nargs='?', default=None)
+    parser.add_argument('--hipchat_host', dest='hipchat_host', nargs='?', default=None)
     parser.add_argument('--open', dest='open', nargs='?')
     parser.add_argument('query', nargs='?', default=None)
     args = parser.parse_args(wflw.args)
 
-    if args.apikey:
-        wflw.save_password('hipchat_api_key', args.apikey)
+    if args.api_key:
+        wflw.save_password('hipchat_api_key', args.api_key)
         return
+
+    if args.hipchat_host:
+        WF.settings['hipchat_host'] = re.sub(r"(^https?://)",
+                                             "", args.hipchat_host)
+        return
+
+    if args.api_url:
+        WF.settings['api_url'] = args.api_url
+        return
+
+    if args.cache_max_age:
+        WF.settings['cache_max_age'] = args.cache_max_age
+        return
+
+    # settings go above here
+    if 'hipchat_host' not in WF.settings:
+        wflw.add_item(title='HipChat hostname is not set.  Please run hipchat_hostname <url>',
+                      valid=False)
+        wflw.send_feedback()
+        return None
 
     if args.open:
         url = hipchat_urlopen(wflw.args[1])

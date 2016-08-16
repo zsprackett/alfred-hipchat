@@ -8,6 +8,19 @@
 	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
+		<key>0161991F-8D03-4F45-9370-0E354F754F85</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C752943A-63B7-4C1B-814A-E066E14E119C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>594D1BF0-7388-443A-8EBA-C57CE4F00A28</key>
 		<array>
 			<dict>
@@ -21,11 +34,76 @@
 				<false/>
 			</dict>
 		</array>
+		<key>7A95CAE3-3C56-4EB4-8B1E-E2BBC14EC25D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>40815AB4-DB81-490E-AD29-0766A9F9E9C4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>98F2852F-E8B0-400C-9371-91F954F8F259</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CF014019-8243-4FE7-83D6-9AD7D4999615</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B9215B4F-2C2C-4633-9DD0-7DD3DCB5769B</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>68A75A7F-85C5-4602-895D-950E420541E5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C752943A-63B7-4C1B-814A-E066E14E119C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C633D96F-6ED9-4749-ADC2-2D145B747488</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CF014019-8243-4FE7-83D6-9AD7D4999615</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3651D242-8187-430D-B6C8-AF80432208E9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E955FB44-9D0C-47B9-98FF-FF114932BF95</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7A95CAE3-3C56-4EB4-8B1E-E2BBC14EC25D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -127,33 +205,12 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>hck</string>
-				<key>subtext</key>
-				<string>Set the HipChat API Key</string>
-				<key>text</key>
-				<string>HipChat Key</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>594D1BF0-7388-443A-8EBA-C57CE4F00A28</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>python hipchat.py --setkey "{query}"</string>
+				<string>python hipchat.py --api_key "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -171,6 +228,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>hipchat_api_token</string>
+				<key>subtext</key>
+				<string>hipchat_api_token &lt;api_token&gt;</string>
+				<key>text</key>
+				<string>Set the HipChat API token</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>594D1BF0-7388-443A-8EBA-C57CE4F00A28</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -178,7 +256,7 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>Your HipChat API key has been saved.</string>
+				<string>Your HipChat API token has been saved.</string>
 				<key>title</key>
 				<string>Success</string>
 			</dict>
@@ -189,11 +267,227 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Your HipChat hostname has been saved.</string>
+				<key>title</key>
+				<string>Success</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>3651D242-8187-430D-B6C8-AF80432208E9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>python hipchat.py --hipchat_host "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>CF014019-8243-4FE7-83D6-9AD7D4999615</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>hipchat_hostname</string>
+				<key>subtext</key>
+				<string>hipchat_hostname &lt;hostname&gt;</string>
+				<key>text</key>
+				<string>Set the HipChat hostname</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>98F2852F-E8B0-400C-9371-91F954F8F259</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>hipchat_api_url</string>
+				<key>subtext</key>
+				<string>hipchat_api_url &lt;api_url&gt;</string>
+				<key>text</key>
+				<string>Set the HipChat api url</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>0161991F-8D03-4F45-9370-0E354F754F85</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>python hipchat.py --api_url "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C752943A-63B7-4C1B-814A-E066E14E119C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Your HipChat API url has been saved.</string>
+				<key>title</key>
+				<string>Success</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>C633D96F-6ED9-4749-ADC2-2D145B747488</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Your HipChat cache age been saved.</string>
+				<key>title</key>
+				<string>Success</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>40815AB4-DB81-490E-AD29-0766A9F9E9C4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>hipchat_cache_max_age</string>
+				<key>subtext</key>
+				<string>hipchat_cache_max_age &lt;max_age&gt;</string>
+				<key>text</key>
+				<string>Set the HipChat cache max age</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E955FB44-9D0C-47B9-98FF-FF114932BF95</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>python hipchat.py --api_url "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>7A95CAE3-3C56-4EB4-8B1E-E2BBC14EC25D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>0161991F-8D03-4F45-9370-0E354F754F85</key>
+		<dict>
+			<key>xpos</key>
+			<integer>810</integer>
+			<key>ypos</key>
+			<integer>430</integer>
+		</dict>
+		<key>3651D242-8187-430D-B6C8-AF80432208E9</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1160</integer>
+			<key>ypos</key>
+			<integer>300</integer>
+		</dict>
+		<key>40815AB4-DB81-490E-AD29-0766A9F9E9C4</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1160</integer>
+			<key>ypos</key>
+			<integer>550</integer>
+		</dict>
 		<key>594D1BF0-7388-443A-8EBA-C57CE4F00A28</key>
 		<dict>
 			<key>xpos</key>
@@ -208,6 +502,20 @@
 			<key>ypos</key>
 			<integer>170</integer>
 		</dict>
+		<key>7A95CAE3-3C56-4EB4-8B1E-E2BBC14EC25D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>980</integer>
+			<key>ypos</key>
+			<integer>550</integer>
+		</dict>
+		<key>98F2852F-E8B0-400C-9371-91F954F8F259</key>
+		<dict>
+			<key>xpos</key>
+			<integer>810</integer>
+			<key>ypos</key>
+			<integer>300</integer>
+		</dict>
 		<key>A7F1D3A3-D69E-4A0A-ACF7-2DE9E4E474DA</key>
 		<dict>
 			<key>xpos</key>
@@ -221,6 +529,34 @@
 			<integer>980</integer>
 			<key>ypos</key>
 			<integer>170</integer>
+		</dict>
+		<key>C633D96F-6ED9-4749-ADC2-2D145B747488</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1160</integer>
+			<key>ypos</key>
+			<integer>430</integer>
+		</dict>
+		<key>C752943A-63B7-4C1B-814A-E066E14E119C</key>
+		<dict>
+			<key>xpos</key>
+			<integer>980</integer>
+			<key>ypos</key>
+			<integer>430</integer>
+		</dict>
+		<key>CF014019-8243-4FE7-83D6-9AD7D4999615</key>
+		<dict>
+			<key>xpos</key>
+			<integer>980</integer>
+			<key>ypos</key>
+			<integer>300</integer>
+		</dict>
+		<key>E955FB44-9D0C-47B9-98FF-FF114932BF95</key>
+		<dict>
+			<key>xpos</key>
+			<integer>810</integer>
+			<key>ypos</key>
+			<integer>550</integer>
 		</dict>
 		<key>F64BBDAB-BC1C-492E-8776-873522F9E3FA</key>
 		<dict>
