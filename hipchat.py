@@ -26,7 +26,8 @@ def hipchat_list(keys):
     for key in keys:
         api_key = str(key)
         try:
-            hipchat_auth = web.get('https://api.hipchat.com/v2/room?auth_token=' +
+            hipchat_auth = web.get(wflw.settings['api_url'] + 
+                                   '/v2/room?auth_token=' +
                                    api_key + '&auth_test=true',
                                    None,
                                    timeout=wflw.settings['timeout'])
